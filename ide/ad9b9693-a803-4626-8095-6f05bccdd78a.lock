@@ -1,0 +1,14 @@
+{
+  "socketPath": "\\\\.\\pipe\\mcp-959ffc0b-6f99-429c-a7cf-ce96e497c4d0.sock",
+  "scheme": "pipe",
+  "headers": {
+    "Authorization": "Nonce b3445dc0-3736-45a7-bdf3-bd04d334ab81"
+  },
+  "pid": 57592,
+  "ideName": "Visual Studio Code",
+  "timestamp": 1775661678406,
+  "workspaceFolders": [
+    "c:\\Users\\eaklamav\\Documents\\github_repo\\Playground\\study_buddy"
+  ],
+  "isTrusted": true
+}

@@ -1,0 +1,14 @@
+{
+  "socketPath": "\\\\.\\pipe\\mcp-7dec8773-7e71-458d-9bb0-a8e5a8265588.sock",
+  "scheme": "pipe",
+  "headers": {
+    "Authorization": "Nonce bd39470c-c651-431a-81e7-f741d28c0203"
+  },
+  "pid": 35900,
+  "ideName": "Visual Studio Code",
+  "timestamp": 1775555466739,
+  "workspaceFolders": [
+    "c:\\Users\\eaklamav\\Documents\\github_repo\\detect-config-signing"
+  ],
+  "isTrusted": true
+}
