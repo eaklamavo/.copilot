@@ -58,17 +58,18 @@ Also record **today's date** (use the current date provided in context) for the 
 | Aquarius | 20 Jan – 18 Feb | Air | Fixed | Saturn / Uranus | The Visionary |
 | Pisces | 19 Feb – 20 Mar | Water | Mutable | Jupiter / Neptune | The Mystic |
 
-#### Moon Sign (approximate — based on date alone)
+#### Moon Sign (calculated from real lunar position)
 
-The Moon spends approximately **2.5 days in each sign** (completing the 12-sign cycle in ~29.5 days). Use the birth date to calculate an approximate Moon sign:
+Do **not** estimate the Moon sign by averaging days per sign — the Moon's speed varies (11°–15° per day) and the error can be a whole sign. Run the bundled calculator ([astro_calc.py](./astro_calc.py), Python 3, no dependencies):
 
-1. Use a known Moon ingress reference: **1 January 2000 — Moon in Scorpio**.
-2. Count the total days from Jan 1 2000 to the birth date.
-3. Divide by 2.364 days per sign average; find the position within the 12-sign cycle.
-4. Present as an **approximation** and note that exact time of birth would confirm precision.
+```
+python astro_calc.py natal --date YYYY-MM-DD --time HH:MM --tz <UTC offset hours> --lat <lat> --lon <lon east+>
+python astro_calc.py natal --date YYYY-MM-DD        # birth time unknown
+```
 
-Alternatively, state the most likely Moon sign based on the birth month/date and flag as approximate if no birth time is given.
-
+- **With birth time:** the output gives Sun and Moon to ~1° (confirmed), the birth lunation, mean North/South Node, and (with `--lat/--lon`) the Ascendant and Midheaven. Present the Moon sign as **confirmed**. Convert the place to latitude/longitude yourself, and use the historical UTC offset for that place and date (e.g. Benin = UTC+1).
+- **Without birth time:** the output gives the Moon's position at 00:00 and 24:00 UT and any sign change that day. If the Moon stays in one sign, state it as certain; if it changes sign, state both signs and the UT time of the ingress, and ask for/mention that a birth time would settle it.
+- If Python is unavailable, fall back to the 1 Jan 2000 Moon-in-Scorpio / 2.364-days-per-sign estimate and clearly flag the Moon sign as a rough approximation.
 #### Rising Sign (Ascendant)
 
 - Calculate **only** when both birth **time** and **location** are provided.
@@ -93,15 +94,13 @@ Alternatively, state the most likely Moon sign based on the birth month/date and
 
 ### Step 4 — Calculate Current Moon Phase
 
-Use the following algorithm based on today's date from context:
-
-**Reference New Moon**: January 29, 2025  
-**Synodic cycle**: 29.53059 days
+Use the **actual Sun–Moon angle**, not a fixed-cycle date formula (real lunations vary by up to ~half a day, and whole-date counting can put the phase in the wrong band). Run, using today's date and time converted to UTC:
 
 ```
-days_since_ref = (today's date) − (29 Jan 2025)
-phase_day = days_since_ref mod 29.53059
+python astro_calc.py moon-now --utc YYYY-MM-DDTHH:MM
 ```
+
+The output gives the Sun and Moon positions, the elongation (Moon longitude − Sun longitude), `phase_day` (= elongation ÷ 360 × 29.53059), the phase name, illumination %, and the exact UTC time of the last New Moon. Map `phase_day` to the table below.
 
 | Phase Day Range | Moon Phase | Energy Theme |
 |---|---|---|
@@ -114,10 +113,13 @@ phase_day = days_since_ref mod 29.53059
 | 22.15 – 25.84 | 🌗 Last Quarter | Release, letting go, forgiveness |
 | 25.84 – 29.53 | 🌘 Waning Crescent | Rest, retreat, restoration |
 
-Show your working: state today's date, the reference date, the days elapsed, the phase_day, and the resulting phase.
+Show your working: state today's date/time (UTC), the Sun and Moon longitudes, the elongation, the `phase_day`, the last New Moon time, and the resulting phase. If the result is within ~0.3 days of a band boundary, say so. If the user's phone app disagrees, trust the calculator output and explain the difference (apps often use the exact conjunction time).
+
+If Python is unavailable, fall back to `phase_day = (days since 29 Jan 2025 New Moon) mod 29.53059`, and flag the phase as approximate (±1 day).
+
+If a birth date/time is known, also report the **birth lunation** (`birth_lunation` in the natal output) in the reading and the front matter, and explain what it means for the native.
 
 ---
-
 ### Step 5 — Analyse Each of the 8 Life Paths
 
 For **each of the 8 life paths** below, synthesise the following layers:
@@ -463,7 +465,7 @@ Confirm the file path to the user after saving, e.g.:
 
 🔆 NATAL POSITIONS
 • ☀️ Sun Sign: [sign] — [element] | [modality] | Ruled by [planet]
-• 🌙 Moon Sign: [sign] (approximate / confirmed) — [element]
+• 🌙 Moon Sign: [sign] (confirmed from birth time / possible sign range if no birth time) — [element]
 • ⬆️ Rising Sign: [sign] | or "Not calculated — birth time required"
 • 🌿 Dominant Element: [element] — [brief 1-line meaning]
 • 🌀 Ruling Planets: [list]
