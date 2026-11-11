@@ -76,9 +76,59 @@ Target **3–6 lessons per phase**. Each lesson should produce one or more actua
 Create `study-plan/README.md` with:
 - Project name and one-line description
 - Prerequisites (tools to install, accounts to create, prior knowledge assumed)
+- **Recommended Resources** section — comprehensive and categorized (see format below; always required)
 - Table of all phases and lessons with links to the `.ipynb` files
 - Estimated total lesson count
 - How to use the notebooks (install Jupyter, run cells top-to-bottom)
+
+#### Recommended Resources Format (REQUIRED — always include all relevant categories)
+
+The Recommended Resources section **must always be present**, comprehensive, and organized by category. Include every category relevant to the project's tech stack; skip only categories with no applicable resources.
+
+```markdown
+## Recommended Resources
+
+### 📚 Official Documentation
+| Resource | URL |
+|----------|-----|
+| <framework/language> Official Docs | <url> |
+| API Reference | <url> |
+| Changelog | <url> |
+
+### 🎓 Learning Resources
+| Resource | URL |
+|----------|-----|
+| Official Tutorial | <url> |
+| Community Course | <url> |
+
+### 📝 Cheat Sheets & Quick Reference
+| Resource | URL |
+|----------|-----|
+| Official Cheat Sheet | <url> |
+| Key Commands Summary | <url> |
+
+### 🛠️ Key Docs by Phase/Dependency
+| Phase | Dependency | URL |
+|-------|-----------|-----|
+| Phase N | <library/service> | <url> |
+
+### 🧪 Practice & Sandboxes
+| Resource | URL |
+|----------|-----|
+| Playground / Fiddle | <url> |
+
+### 🏘️ Community & Support
+| Resource | URL |
+|----------|-----|
+| GitHub Repository | <url> |
+| Official Forum / Discord | <url> |
+```
+
+**Rules:**
+- Always generate this section — never omit it.
+- Use real, verified URLs derived from the analyzed workspace files, imports, and built-in knowledge.
+- If a URL cannot be verified, write `— search: "<search term>"` rather than guessing.
+- Populate the **Key Docs by Phase** subsection with a direct link for every major library or service introduced in each phase.
 
 ### Step 5 — Generate Lesson Notebooks
 
